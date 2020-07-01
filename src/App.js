@@ -1,5 +1,8 @@
+import { Grommet, Heading, Meter } from 'grommet';
 import React from 'react';
-import { Grommet, FormField, TextInput, Meter } from 'grommet';
+import { RecoilRoot } from 'recoil';
+import Form from './Form';
+import Stats from './Stats';
 
 const theme = {
   global: {
@@ -13,31 +16,19 @@ const theme = {
 
 function App() {
   return (
-    <Grommet theme={theme}>
-      <div className="App">
-        <header className="App-header">
-          <p>Home Office Calculator</p>
-          <FormField label="# Employees">
-            <TextInput placeholder="0" />
-          </FormField>
-        </header>
-      </div>
-      <div>
-        <Meter
-          type="circle"
-          round
-          max={120}
-          size="small"
-          values={[
-            {
-              value: 80,
-              label: 'sixty',
-              onClick: () => {},
-            },
-          ]}
-        />
-      </div>
-    </Grommet>
+    <RecoilRoot>
+      <Grommet theme={theme}>
+        <div className="App">
+          <header className="App-header">
+            <Heading margin="none">Home Office Calculator</Heading>
+            <Form />
+          </header>
+        </div>
+        <div>
+          <Stats />
+        </div>
+      </Grommet>
+    </RecoilRoot>
   );
 }
 

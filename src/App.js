@@ -35,9 +35,7 @@ function App() {
                 <Heading margin="none">Home Office Calculator</Heading>
               </Box>
             </Box>
-            <Box direction="row" pad="medium">
-              <Form />
-            </Box>
+            <Form />
           </header>
         </div>
         <div>

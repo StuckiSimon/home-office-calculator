@@ -1,4 +1,4 @@
-import { Grommet, Heading, Meter } from 'grommet';
+import { Grommet, Heading } from 'grommet';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import Form from './Form';

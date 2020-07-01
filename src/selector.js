@@ -12,11 +12,12 @@ export const workSpaceState = selector({
     const homeOfficeDays = get(homeOfficeDaysState);
 
     const using = (5 - homeOfficeDays) / 5;
+    let areaForEmployees = getAreaForEmployees(employees * using);
+    let areaForEmployeesNormal = getAreaForEmployees(employees);
     return {
-      areaRequiredPerWeekPerEmployeeWithHomeOffice: getAreaForEmployees(
-        employees * using
-      ),
-      areaRequiredPerWeekPerEmployee: getAreaForEmployees(employees),
+      areaRequiredPerWeekPerEmployeeWithHomeOffice: areaForEmployees,
+      areaRequiredPerWeekPerEmployee: areaForEmployeesNormal,
+      diff: Math.round(areaForEmployeesNormal - areaForEmployees),
     };
   },
 });

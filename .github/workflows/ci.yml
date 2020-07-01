@@ -32,3 +32,6 @@ jobs:
         build_dir: build
         # Allow Jekyll to build your site
         jekyll: false
+        
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

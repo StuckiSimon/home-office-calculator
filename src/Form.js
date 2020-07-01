@@ -1,13 +1,25 @@
-import { Box, FormField, TextInput } from 'grommet';
+import { Box, FormField, TextInput, ThemeContext } from 'grommet';
 import React from 'react';
+import Select from 'react-select';
 import { useRecoilState } from 'recoil';
-import { employeeCountState, homeOfficeDaysState } from './state';
+import {
+  employeeCountState,
+  homeOfficeDaysState,
+  locationState,
+} from './state';
+import cities from './reference/cities.json';
 
 function Form() {
   const [employees, setEmployees] = useRecoilState(employeeCountState);
   const [homeOfficeDays, setHomeOfficeDays] = useRecoilState(
     homeOfficeDaysState
   );
+  const [location, setLocation] = useRecoilState(locationState);
+  const citiesFormatted = Object.entries(cities).map(([key, label]) => ({
+    value: key,
+    label,
+  }));
+  const selectedCity = citiesFormatted.find((city) => city.value === location);
 
   return (
     <>
@@ -34,6 +46,20 @@ function Form() {
             }}
           />
         </FormField>
+      </Box>
+      <Box pad="small" basis="medium">
+        <ThemeContext.Extend
+          value={{ formField: { border: { color: 'transparent' } } }}
+        >
+          <FormField label="Location">
+            <Select
+              menuPortalTarget={document.body}
+              value={selectedCity}
+              onChange={({ value }) => setLocation(value)}
+              options={citiesFormatted}
+            />
+          </FormField>
+        </ThemeContext.Extend>
       </Box>
     </>
   );

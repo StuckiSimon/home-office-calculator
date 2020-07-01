@@ -14,11 +14,13 @@ function Stats() {
       <Box pad="small">
         <Meter
           type="circle"
+          background="status-ok"
           round
           max={areaRequiredPerWeekPerEmployee}
           size="small"
           values={[
             {
+              color: 'accent-4',
               value: areaRequiredPerWeekPerEmployeeWithHomeOffice,
               label: 'with home office',
               onClick: () => {},

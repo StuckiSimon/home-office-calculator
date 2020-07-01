@@ -20,6 +20,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: Install Packages
+      run: yarn install --frozen-lockfile
+    - name: Build page
+      run: yarn build
+
     - name: GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2.1.0
       with:

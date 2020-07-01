@@ -1,4 +1,4 @@
-import { Grommet, Heading } from 'grommet';
+import { Box, Grommet, Heading } from 'grommet';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import Form from './Form';
@@ -20,12 +20,30 @@ function App() {
       <Grommet theme={theme}>
         <div className="App">
           <header className="App-header">
-            <Heading margin="none">Home Office Calculator</Heading>
-            <Form />
+            <Box
+              pad={{
+                vertical: 'none',
+                horizontal: 'medium',
+              }}
+            >
+              <Box
+                pad={{
+                  vertical: 'none',
+                  horizontal: 'small',
+                }}
+              >
+                <Heading margin="none">Home Office Calculator</Heading>
+              </Box>
+            </Box>
+            <Box direction="row" pad="medium">
+              <Form />
+            </Box>
           </header>
         </div>
         <div>
-          <Stats />
+          <Box direction="row" pad="medium">
+            <Stats />
+          </Box>
         </div>
       </Grommet>
     </RecoilRoot>

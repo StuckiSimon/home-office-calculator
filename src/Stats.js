@@ -1,32 +1,41 @@
-import { Box, Meter } from 'grommet';
+import { Box, Heading, Meter } from 'grommet';
+import styled from 'styled-components';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { workSpaceState } from './selector';
 
+const FactContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+`;
+
 function Stats() {
-  const {
-    areaRequiredPerWeekPerEmployeeWithHomeOffice,
-    areaRequiredPerWeekPerEmployee,
-  } = useRecoilValue(workSpaceState);
+  const { normal, optimal, diff } = useRecoilValue(workSpaceState);
 
   return (
     <>
       <Box pad="small">
-        <Meter
-          type="circle"
-          background="status-ok"
-          round
-          max={areaRequiredPerWeekPerEmployee}
-          size="small"
-          values={[
-            {
-              color: 'accent-4',
-              value: areaRequiredPerWeekPerEmployeeWithHomeOffice,
-              label: 'with home office',
-              onClick: () => {},
-            },
-          ]}
-        />
+        <Heading size="small">Arbeitsplätze</Heading>
+        <div style={{ position: 'relative' }}>
+          <Meter
+            type="circle"
+            background="status-ok"
+            round
+            max={normal.workplaces}
+            size="small"
+            values={[
+              {
+                color: 'accent-4',
+                value: optimal.workplaces,
+              },
+            ]}
+          />
+          <FactContainer>
+            <Heading>-{diff.workplaces}</Heading>
+          </FactContainer>
+        </div>
       </Box>
     </>
   );

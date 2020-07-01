@@ -1,16 +1,44 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from 'react';
+import { Grommet, FormField, TextInput, Meter } from 'grommet';
+
+const theme = {
+  global: {
+    font: {
+      family: 'Roboto',
+      size: '14px',
+      height: '20px',
+    },
+  },
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Home Office Calculator</p>
-      </header>
-    </div>
-  )
+    <Grommet theme={theme}>
+      <div className="App">
+        <header className="App-header">
+          <p>Home Office Calculator</p>
+          <FormField label="# Employees">
+            <TextInput placeholder="0" />
+          </FormField>
+        </header>
+      </div>
+      <div>
+        <Meter
+          type="circle"
+          round
+          max={120}
+          size="small"
+          values={[
+            {
+              value: 80,
+              label: 'sixty',
+              onClick: () => {},
+            },
+          ]}
+        />
+      </div>
+    </Grommet>
+  );
 }
 
-export default App
+export default App;

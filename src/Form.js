@@ -131,12 +131,20 @@ function Form() {
                 options={citiesFormatted}
               />
             </Box>
-            <Box pad="small">
+            <Box pad="small" basis="medium">
               <FormField
                 label={
-                  <>
+                  <Box direction="row" align="center">
                     Mietpreis pro m<sup>2</sup> Bürofläche
-                  </>
+                    <Tippy
+                      content="Quelle: https://de.statista.com/statistik/daten/studie/505317/umfrage/durchschnittsmieten-fuer-bueroflaechen-in-den-20-groessten-schweizer-agglomerationen/"
+                      interactive
+                    >
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Tippy>
+                  </Box>
                 }
               >
                 <TextInput
@@ -151,7 +159,21 @@ function Form() {
               </FormField>
             </Box>
             <Box pad="small">
-              <FormField label={<>Mietpreis pro Parkplatz</>}>
+              <FormField
+                label={
+                  <Box direction="row" align="center">
+                    Mietpreis pro Parkplatz
+                    <Tippy
+                      content="Quelle: https://www.handelszeitung.ch/unternehmen/parkieren-das-kosten-einstellplatze-den-schweizer-stadten"
+                      interactive
+                    >
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Tippy>
+                  </Box>
+                }
+              >
                 <TextInput
                   min={0}
                   max={500}

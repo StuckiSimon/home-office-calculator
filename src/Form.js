@@ -61,7 +61,7 @@ function Form() {
                 label="Anzahl Mitarbeiter"
                 value={employees}
                 onChange={(e) => {
-                  setEmployees(parseInt(e.target.value, 10));
+                  setEmployees(parseInt(e.target.value, 10) || 0);
                 }}
                 validationObject={employeeCountValidation}
               />

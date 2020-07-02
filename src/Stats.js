@@ -125,23 +125,22 @@ function Stats() {
       </Box>
       <Box direction="row">
         <Box pad="xsmall">
-          <Heading level={4}>Arbeitsplätze</Heading>
-          <StatMeter
-            max={normal.workplaces}
-            current={optimal.workplaces}
-            diff={-diff.workplaces}
+          <Fact label="Arbeitsplätze weniger" value={diff.workplaces} />
+        </Box>
+        <Box pad="xsmall">
+          <Fact
+            label={
+              <>
+                kg CO<sub>2</sub> weniger
+              </>
+            }
+            value={Math.round(totalDiffEmissions / 1000)}
           />
         </Box>
         <Box pad="xsmall">
-          <Heading level={4}>Bürofläche</Heading>
-          <StatMeter
-            max={normal.area}
-            current={optimal.area}
-            diff={
-              <>
-                -{diff.area}m<sup>2</sup>
-              </>
-            }
+          <Fact
+            label="h mehr Freizeit"
+            value={Math.round(commuteTime.diff / 60)}
           />
         </Box>
       </Box>

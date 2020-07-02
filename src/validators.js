@@ -1,6 +1,6 @@
 import { selector } from 'recoil';
 import ow from 'ow';
-import { employeeCountState } from './state';
+import { employeeCountState, homeOfficeDaysState } from './state';
 
 const validateProbe = (val, prober) => {
   try {
@@ -43,9 +43,21 @@ export const employeeCountValidator = selector({
       probe(
         ow.number.lessThan(1001),
         warn(
-          'Der Rechner ist optimal für Firmen unter 1000 Mitarbeitern geeignet.'
+          'Der Rechner ist optimal für Firmen unter 1000 Mitarbeitern geeignet'
         )
       ),
+    ]);
+  },
+});
+
+export const homeOfficeDaysValidator = selector({
+  key: 'homeOfficeDaysValidator',
+  get: ({ get }) => {
+    const homeOfficeDays = get(homeOfficeDaysState);
+
+    return validate(homeOfficeDays, [
+      probe(ow.number.positive, error('Zahl muss positiv sein')),
+      probe(ow.number.lessThan(5), error('Die Zahl muss tiefer als 5 sein')),
     ]);
   },
 });

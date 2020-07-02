@@ -18,7 +18,7 @@ import parkingPrices from './reference/parkingPrices.json';
 import officeSpaceRentPrices from './reference/officeSpaceRentPrices.json';
 import buildingEnergyStandards from './reference/buildingEnergyStandards.json';
 import heatingSources from './reference/heatingSources.json';
-import { employeeCountValidator } from './validators';
+import { employeeCountValidator, homeOfficeDaysValidator } from './validators';
 import ValidatedFormField from './visual/ValidatedFormField';
 import SelectFormField from './visual/SelectFormField';
 
@@ -28,6 +28,7 @@ function Form() {
   const [homeOfficeDays, setHomeOfficeDays] = useRecoilState(
     homeOfficeDaysState
   );
+  const homeOfficeDaysValidation = useRecoilValue(homeOfficeDaysValidator);
   const [employeeArea, setEmployeeArea] = useRecoilState(employeeAreaState);
   const [location, setLocation] = useRecoilState(locationState);
   const citiesFormatted = Object.entries(cities).map(([key, label]) => ({
@@ -91,21 +92,19 @@ function Form() {
               />
             </Box>
             <Box pad="small">
-              <FormField label="Tage Homeoffice / Woche">
-                <TextInput
-                  placeholder="1-4"
-                  min={1}
-                  max={4}
-                  type="number"
-                  value={homeOfficeDays}
-                  onChange={(e) => {
-                    const homeOfficeDays = parseInt(e.target.value, 10) || 0;
-                    setHomeOfficeDays(
-                      homeOfficeDays === 5 ? 4 : homeOfficeDays
-                    );
-                  }}
-                />
-              </FormField>
+              <ValidatedFormField
+                placeholder="1-4"
+                label="Tage Homeoffice / Woche"
+                min={1}
+                max={4}
+                type="number"
+                value={homeOfficeDays}
+                onChange={(e) => {
+                  const homeOfficeDays = parseInt(e.target.value, 10) || 0;
+                  setHomeOfficeDays(homeOfficeDays === 5 ? 4 : homeOfficeDays);
+                }}
+                validationObject={homeOfficeDaysValidation}
+              />
             </Box>
           </Box>
         </Tab>

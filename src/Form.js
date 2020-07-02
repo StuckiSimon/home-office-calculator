@@ -37,6 +37,8 @@ function Form() {
               <FormField label="# Employees">
                 <TextInput
                   placeholder="0"
+                  min={0}
+                  max={1000}
                   type="number"
                   value={employees}
                   onChange={(e) => {
@@ -49,6 +51,8 @@ function Form() {
               <FormField label="# Home Office Days">
                 <TextInput
                   placeholder="0-5"
+                  min={0}
+                  max={5}
                   type="number"
                   value={homeOfficeDays}
                   onChange={(e) => {

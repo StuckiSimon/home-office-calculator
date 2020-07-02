@@ -42,6 +42,8 @@ function Stats() {
   );
   const optimalTotalPrice =
     officeRent.optimal + heatingPrice.optimal + parkingPrice.optimal;
+  const diffTotalPrice =
+    officeRent.diff + heatingPrice.diff + parkingPrice.diff;
 
   const pricingDistribution = [
     {
@@ -125,6 +127,7 @@ function Stats() {
               {
                 property: 'diff',
                 header: 'Gespart',
+                footer: '' + diffTotalPrice,
                 render: (data) => data.diff + ' CHF',
               },
             ]}

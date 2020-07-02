@@ -10,6 +10,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import {
   commuteEmissionsSelector,
+  commuteTimeSelector,
   officeHeatingEmissionsSelector,
   officeHeatingPriceSelector,
   officeRentSelector,
@@ -29,6 +30,24 @@ const getCalcAsPercentage = (normal, optimal, diff) => {
 
 const getAsPercentage = (hundred, asked) => {
   return Math.round((100 / hundred) * asked);
+};
+
+const Fact = ({ label, value }) => {
+  return (
+    <Box direction="row" align="end">
+      <Heading margin="none">{value}</Heading>
+      <Heading
+        margin={{
+          vertical: 'xsmall',
+          horizontal: 'small',
+        }}
+        color="dark-4"
+        level={3}
+      >
+        {label}
+      </Heading>
+    </Box>
+  );
 };
 
 function Stats() {
@@ -91,6 +110,8 @@ function Stats() {
     officeHeatingEmissions.optimal + commuteEmissions.optimal,
     officeHeatingEmissions.diff + commuteEmissions.diff
   );
+
+  const commuteTime = useRecoilValue(commuteTimeSelector);
 
   return (
     <Box direction="column" pad="medium">
@@ -213,7 +234,34 @@ function Stats() {
             ]}
           />
         </AccordionPanel>
-        <AccordionPanel label="Sozial" />
+        <AccordionPanel label="Sozial">
+          <Box direction="row">
+            <Box pad="small">
+              <Heading level="6" margin="none">
+                Zeitersparnis
+              </Heading>
+              <StatMeter
+                max={commuteTime.normal}
+                current={commuteTime.optimal}
+                diff={<>-{Math.round(commuteTime.diff / 60)}h</>}
+              />
+            </Box>
+            <Box pad="small" justify="end">
+              <Fact
+                label="Kuchen backen"
+                value={Math.round(commuteTime.diff / 60)}
+              />
+              <Fact
+                label="Fussballspiele"
+                value={Math.round(commuteTime.diff / 90)}
+              />
+              <Fact
+                label="Marathons"
+                value={Math.round(commuteTime.diff / 120)}
+              />
+            </Box>
+          </Box>
+        </AccordionPanel>
       </Accordion>
     </Box>
   );

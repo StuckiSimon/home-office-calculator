@@ -135,7 +135,7 @@ function Form() {
               <FormField
                 label={
                   <Box direction="row" align="center">
-                    Mietpreis pro m<sup>2</sup> Bürofläche
+                    Mietpreis pro m<sup>2</sup>&nbsp;Bürofläche
                     <Tippy
                       content="Quelle: https://de.statista.com/statistik/daten/studie/505317/umfrage/durchschnittsmieten-fuer-bueroflaechen-in-den-20-groessten-schweizer-agglomerationen/"
                       interactive

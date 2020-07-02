@@ -125,7 +125,10 @@ function Stats() {
       </Box>
       <Box direction="row">
         <Box pad="xsmall">
-          <Fact label="Arbeitsplätze weniger" value={workSpaces.diff} />
+          <Fact
+            label="Arbeitsplätze weniger"
+            value={workSpaces.diff.toLocaleString('de-CH')}
+          />
         </Box>
         <Box pad="xsmall">
           <Fact
@@ -134,13 +137,15 @@ function Stats() {
                 kg CO<sub>2</sub> weniger
               </>
             }
-            value={Math.round(totalDiffEmissions / 1000)}
+            value={Math.round(totalDiffEmissions / 1000).toLocaleString(
+              'de-CH'
+            )}
           />
         </Box>
         <Box pad="xsmall">
           <Fact
             label="h mehr Freizeit"
-            value={Math.round(commuteTime.diff / 60)}
+            value={Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}
           />
         </Box>
       </Box>
@@ -175,8 +180,8 @@ function Stats() {
               {
                 property: 'diff',
                 header: 'Gespart',
-                footer: '' + diffTotalPrice,
-                render: (data) => data.diff + ' CHF',
+                footer: '' + diffTotalPrice.toLocaleString('de-CH'),
+                render: (data) => data.diff.toLocaleString('de-CH') + ' CHF',
               },
             ]}
             data={[
@@ -203,7 +208,11 @@ function Stats() {
                 current={totalEmissionPercentage.optimal}
                 diff={
                   <>
-                    -{Math.round(totalDiffEmissions / 1000)} kg&nbsp;CO
+                    -
+                    {Math.round(totalDiffEmissions / 1000).toLocaleString(
+                      'de-CH'
+                    )}{' '}
+                    kg&nbsp;CO
                     <sub>2</sub>
                   </>
                 }
@@ -221,10 +230,12 @@ function Stats() {
               {
                 property: 'diff',
                 header: 'Gespart',
-                footer: '' + Math.round(totalDiffEmissions / 1000),
+                footer:
+                  '' +
+                  Math.round(totalDiffEmissions / 1000).toLocaleString('de-CH'),
                 render: (data) => (
                   <>
-                    {data.diff} kg CO<sub>2</sub>
+                    {data.diff.toLocaleString('de-CH')} kg CO<sub>2</sub>
                   </>
                 ),
               },
@@ -250,21 +261,32 @@ function Stats() {
               <StatMeter
                 max={commuteTime.normal}
                 current={commuteTime.optimal}
-                diff={<>-{Math.round(commuteTime.diff / 60)}h</>}
+                diff={
+                  <>
+                    -{Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}
+                    h
+                  </>
+                }
               />
             </Box>
             <Box pad="small" justify="end">
               <Fact
                 label="Kuchen backen"
-                value={Math.round(commuteTime.diff / 60)}
+                value={Math.round(commuteTime.diff / 60).toLocaleString(
+                  'de-CH'
+                )}
               />
               <Fact
                 label="Fussballspiele"
-                value={Math.round(commuteTime.diff / 90)}
+                value={Math.round(commuteTime.diff / 90).toLocaleString(
+                  'de-CH'
+                )}
               />
               <Fact
                 label="Marathons"
-                value={Math.round(commuteTime.diff / 120)}
+                value={Math.round(commuteTime.diff / 120).toLocaleString(
+                  'de-CH'
+                )}
               />
             </Box>
           </Box>

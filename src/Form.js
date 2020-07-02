@@ -6,9 +6,10 @@ import {
   TextInput,
   ThemeContext,
 } from 'grommet';
+import { StatusInfo } from 'grommet-icons';
 import React from 'react';
 import Select from 'react-select';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   employeeAreaState,
   employeeCountState,
@@ -20,9 +21,12 @@ import {
 import cities from './reference/cities.json';
 import parkingPrices from './reference/parkingPrices.json';
 import officeSpaceRentPrices from './reference/officeSpaceRentPrices.json';
+import { employeeCountValidator } from './validators';
+import ValidatedFormField from './ValidatedFormField';
 
 function Form() {
   const [employees, setEmployees] = useRecoilState(employeeCountState);
+  const employeeCountValidation = useRecoilValue(employeeCountValidator);
   const [homeOfficeDays, setHomeOfficeDays] = useRecoilState(
     homeOfficeDaysState
   );
@@ -50,19 +54,16 @@ function Form() {
       <Accordion multiple basis="full">
         <AccordionPanel label="Unternehmen">
           <Box direction="row">
-            <Box pad="small">
-              <FormField label="# Employees">
-                <TextInput
-                  placeholder="0"
-                  min={0}
-                  max={1000}
-                  type="number"
-                  value={employees}
-                  onChange={(e) => {
-                    setEmployees(e.target.value);
-                  }}
-                />
-              </FormField>
+            <Box pad="small" basis="medium">
+              <ValidatedFormField
+                placeholder="0"
+                label="Anzahl Mitarbeiter"
+                value={employees}
+                onChange={(e) => {
+                  setEmployees(parseInt(e.target.value, 10));
+                }}
+                validationObject={employeeCountValidation}
+              />
             </Box>
             <Box pad="small">
               <FormField label="# Home Office Days">
@@ -86,7 +87,16 @@ function Form() {
               <ThemeContext.Extend
                 value={{ formField: { border: { color: 'transparent' } } }}
               >
-                <FormField label="Location">
+                <FormField
+                  label={
+                    <Box direction="row" align="center">
+                      Ortschaft
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Box>
+                  }
+                >
                   <Select
                     menuPortalTarget={document.body}
                     value={selectedCity}

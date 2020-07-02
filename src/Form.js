@@ -23,6 +23,7 @@ import parkingPrices from './reference/parkingPrices.json';
 import officeSpaceRentPrices from './reference/officeSpaceRentPrices.json';
 import { employeeCountValidator } from './validators';
 import ValidatedFormField from './ValidatedFormField';
+import SelectFormField from './SelectFormField';
 
 function Form() {
   const [employees, setEmployees] = useRecoilState(employeeCountState);
@@ -84,27 +85,19 @@ function Form() {
         <AccordionPanel label="Mietpreise">
           <Box direction="row">
             <Box pad="small" basis="medium">
-              <ThemeContext.Extend
-                value={{ formField: { border: { color: 'transparent' } } }}
-              >
-                <FormField
-                  label={
-                    <Box direction="row" align="center">
-                      Ortschaft
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
+              <SelectFormField
+                label={
+                  <Box direction="row" align="center">
+                    Ortschaft
+                    <Box margin={{ horizontal: 'xsmall' }}>
+                      <StatusInfo size="small" color="brand" />
                     </Box>
-                  }
-                >
-                  <Select
-                    menuPortalTarget={document.body}
-                    value={selectedCity}
-                    onChange={onLocationSelect}
-                    options={citiesFormatted}
-                  />
-                </FormField>
-              </ThemeContext.Extend>
+                  </Box>
+                }
+                value={selectedCity}
+                onChange={onLocationSelect}
+                options={citiesFormatted}
+              />
             </Box>
             <Box pad="small">
               <FormField

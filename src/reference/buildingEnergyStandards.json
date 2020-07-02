@@ -1,0 +1,22 @@
+{
+  "old": {
+    "value": "120",
+    "label": "Altbau"
+  },
+  "san": {
+    "value": "60",
+    "label": "Sanierung"
+  },
+  "new": {
+    "value": "40",
+    "label": "Neubau"
+  },
+  "min": {
+    "value": "20",
+    "label": "Minergie"
+  },
+  "pas": {
+    "value": "0",
+    "label": "Passivhaus"
+  }
+}

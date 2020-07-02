@@ -33,3 +33,13 @@ export const employeeAreaState = atom({
   key: 'employeeAreaState',
   default: 10,
 });
+
+export const officeEnergyStandardState = atom({
+  key: 'officeEnergyStandardState',
+  default: 'san',
+});
+
+export const officeHeatingSourceState = atom({
+  key: 'officeHeatingSourceState',
+  default: 'oil',
+});

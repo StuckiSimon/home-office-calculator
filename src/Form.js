@@ -1,14 +1,6 @@
-import {
-  Accordion,
-  AccordionPanel,
-  Box,
-  FormField,
-  TextInput,
-  ThemeContext,
-} from 'grommet';
+import { Accordion, AccordionPanel, Box, FormField, TextInput } from 'grommet';
 import { StatusInfo } from 'grommet-icons';
 import React from 'react';
-import Select from 'react-select';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   employeeAreaState,
@@ -17,10 +9,14 @@ import {
   locationParkingPriceState,
   locationSqmPriceState,
   locationState,
+  officeEnergyStandardState,
+  officeHeatingSourceState,
 } from './state';
 import cities from './reference/cities.json';
 import parkingPrices from './reference/parkingPrices.json';
 import officeSpaceRentPrices from './reference/officeSpaceRentPrices.json';
+import buildingEnergyStandards from './reference/buildingEnergyStandards.json';
+import heatingSources from './reference/heatingSources.json';
 import { employeeCountValidator } from './validators';
 import ValidatedFormField from './ValidatedFormField';
 import SelectFormField from './SelectFormField';
@@ -50,6 +46,33 @@ function Form() {
     setLocationParkingPrice(parkingPrices[value]);
     setLocationSqmPrice(officeSpaceRentPrices[value]);
   };
+
+  const [officeEnergyStandard, setOfficeEnergyStandard] = useRecoilState(
+    officeEnergyStandardState
+  );
+  const energyStandardsFormatted = Object.entries(
+    buildingEnergyStandards
+  ).map(([key, { label }]) => ({ value: key, label }));
+  const selectedEnergyStandard = energyStandardsFormatted.find(
+    (energyStandard) => energyStandard.value === officeEnergyStandard
+  );
+  const onEnergyStandardSelect = ({ value }) => {
+    setOfficeEnergyStandard(value);
+  };
+
+  const [officeHeatingSource, setOfficeHeatingSource] = useRecoilState(
+    officeHeatingSourceState
+  );
+  const heatingSourcesFormatted = Object.entries(
+    heatingSources
+  ).map(([key, { label }]) => ({ value: key, label }));
+  const selectedHeatingSource = heatingSourcesFormatted.find(
+    (heatingSource) => heatingSource.value === officeHeatingSource
+  );
+  const onHeatingSourceSelect = ({ value }) => {
+    setOfficeHeatingSource(value);
+  };
+
   return (
     <Box direction="column" pad="medium">
       <Accordion multiple basis="full">
@@ -154,6 +177,22 @@ function Form() {
                   }}
                 />
               </FormField>
+            </Box>
+            <Box pad="small" basis="medium">
+              <SelectFormField
+                label="Heizung"
+                value={selectedHeatingSource}
+                onChange={onHeatingSourceSelect}
+                options={heatingSourcesFormatted}
+              />
+            </Box>
+            <Box pad="small" basis="medium">
+              <SelectFormField
+                label="Energiestandard"
+                value={selectedEnergyStandard}
+                onChange={onEnergyStandardSelect}
+                options={energyStandardsFormatted}
+              />
             </Box>
           </Box>
         </AccordionPanel>

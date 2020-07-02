@@ -1,0 +1,14 @@
+{
+  "oil": {
+    "value": "2900",
+    "label": "Öl"
+  },
+  "gas": {
+    "value": "2000",
+    "label": "Gas"
+  },
+  "pum": {
+    "value": "130",
+    "label": "Wärmepumpe"
+  }
+}

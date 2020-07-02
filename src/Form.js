@@ -2,6 +2,7 @@ import { Box, FormField, Tab, Tabs, TextInput } from 'grommet';
 import { StatusInfo } from 'grommet-icons';
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import Tippy from '@tippyjs/react';
 import {
   employeeAreaState,
   employeeCountState,
@@ -115,9 +116,14 @@ function Form() {
                 label={
                   <Box direction="row" align="center">
                     Ortschaft
-                    <Box margin={{ horizontal: 'xsmall' }}>
-                      <StatusInfo size="small" color="brand" />
-                    </Box>
+                    <Tippy
+                      content="Ortschaft wird verwendet um Mietpreis Bürofläche und Parkplatz zu wählen."
+                      interactive
+                    >
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Tippy>
                   </Box>
                 }
                 value={selectedCity}

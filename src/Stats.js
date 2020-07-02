@@ -15,7 +15,7 @@ import {
   officeHeatingPriceSelector,
   officeRentSelector,
   parkingPriceSelector,
-  workSpaceState,
+  workSpaceSelector,
 } from './selector';
 import StatMeter from './visual/StatMeter';
 import PercentageDistribution from './visual/PercentageDistribution';
@@ -51,7 +51,7 @@ const Fact = ({ label, value }) => {
 };
 
 function Stats() {
-  const { normal, optimal, diff } = useRecoilValue(workSpaceState);
+  const workSpaces = useRecoilValue(workSpaceSelector);
   const officeRent = useRecoilValue(officeRentSelector);
   const heatingPrice = useRecoilValue(officeHeatingPriceSelector);
   const parkingPrice = useRecoilValue(parkingPriceSelector);
@@ -125,7 +125,7 @@ function Stats() {
       </Box>
       <Box direction="row">
         <Box pad="xsmall">
-          <Fact label="Arbeitsplätze weniger" value={diff.workplaces} />
+          <Fact label="Arbeitsplätze weniger" value={workSpaces.diff} />
         </Box>
         <Box pad="xsmall">
           <Fact

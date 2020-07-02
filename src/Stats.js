@@ -152,7 +152,6 @@ function Stats() {
                 Kostenreduktion
               </Heading>
               <StatMeter
-                size="medium"
                 max={totalPricePercentage.normal}
                 current={totalPricePercentage.optimal}
                 diff={<>-{totalPricePercentage.diff}%</>}
@@ -193,12 +192,12 @@ function Stats() {
                 Emissionsreduktion
               </Heading>
               <StatMeter
-                size="medium"
                 max={totalEmissionPercentage.normal}
                 current={totalEmissionPercentage.optimal}
                 diff={
                   <>
-                    -{Math.round(totalDiffEmissions / 1000)} kg CO<sub>2</sub>
+                    -{Math.round(totalDiffEmissions / 1000)} kg&nbsp;CO
+                    <sub>2</sub>
                   </>
                 }
               />

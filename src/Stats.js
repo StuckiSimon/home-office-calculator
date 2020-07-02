@@ -115,7 +115,14 @@ function Stats() {
 
   return (
     <Box direction="column" pad="medium">
-      <Heading size="small">Auswertung</Heading>
+      <Box direction="row" align="end">
+        <Heading size="small">
+          Auswertung
+          <Text color="dark-4" margin="small">
+            Alle Zahlen pro Monat
+          </Text>
+        </Heading>
+      </Box>
       <Box direction="row">
         <Box pad="xsmall">
           <Heading level={4}>Arbeitsplätze</Heading>

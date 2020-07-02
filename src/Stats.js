@@ -1,4 +1,4 @@
-import { Box, Heading } from 'grommet';
+import { Accordion, AccordionPanel, Box, Heading } from 'grommet';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { workSpaceState } from './selector';
@@ -32,6 +32,11 @@ function Stats() {
           />
         </Box>
       </Box>
+      <Accordion multiple basis="full">
+        <AccordionPanel label="Ökonomie" />
+        <AccordionPanel label="Ökologie" />
+        <AccordionPanel label="Sozial" />
+      </Accordion>
     </Box>
   );
 }

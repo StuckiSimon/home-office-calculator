@@ -4,13 +4,11 @@ import React from 'react';
 const AppHeader = () => (
   <Box
     pad={{
-      vertical: 'none',
       horizontal: 'medium',
     }}
   >
     <Box
       pad={{
-        vertical: 'none',
         horizontal: 'small',
       }}
     >
@@ -22,10 +20,13 @@ const AppHeader = () => (
         Homeoffice Rechner
       </Heading>
       <Text>
-        Der Homeoffice Rechner ermöglicht es Dienstleitungsbetrieben den Nutzen
-        von Homeoffice abzuschätzen. Der Rechner ist für KMUs, welche primär
-        Computerbasiert arbeiten, geeignet. Für den Einsatz bei Grossbetrieben
-        oder handwerklichen Unternehmen ist er wenig hilfreich.
+        Der Homeoffice Rechner ermöglicht es Dienstleitungsbetrieben in der
+        Schweiz den Nutzen von Homeoffice abzuschätzen. Der Rechner ist für KMUs
+        welche primär am Computer arbeiten geeignet.
+      </Text>
+      <Text color="dark-6">
+        Für den Einsatz bei Grossbetrieben oder handwerklichen Unternehmen ist
+        er nicht geeignet.
       </Text>
     </Box>
   </Box>

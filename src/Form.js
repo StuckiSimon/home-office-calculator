@@ -92,9 +92,9 @@ function Form() {
             <Box pad="small">
               <FormField label="# Home Office Days">
                 <TextInput
-                  placeholder="0-5"
-                  min={0}
-                  max={5}
+                  placeholder="1-4"
+                  min={1}
+                  max={4}
                   type="number"
                   value={homeOfficeDays}
                   onChange={(e) => {

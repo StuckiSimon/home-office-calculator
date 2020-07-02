@@ -1,4 +1,4 @@
-import { Accordion, AccordionPanel, Box, FormField, TextInput } from 'grommet';
+import { Box, FormField, Tab, Tabs, TextInput } from 'grommet';
 import { StatusInfo } from 'grommet-icons';
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -74,9 +74,9 @@ function Form() {
   };
 
   return (
-    <Box direction="column" pad="medium">
-      <Accordion multiple basis="full">
-        <AccordionPanel label="Unternehmen">
+    <Box direction="row" pad="medium">
+      <Tabs alignControls="start" flex>
+        <Tab title="Unternehmen">
           <Box direction="row">
             <Box pad="small" basis="medium">
               <ValidatedFormField
@@ -107,8 +107,8 @@ function Form() {
               </FormField>
             </Box>
           </Box>
-        </AccordionPanel>
-        <AccordionPanel label="Mietpreise">
+        </Tab>
+        <Tab title="Mietpreise">
           <Box direction="row">
             <Box pad="small" basis="medium">
               <SelectFormField
@@ -158,8 +158,8 @@ function Form() {
               </FormField>
             </Box>
           </Box>
-        </AccordionPanel>
-        <AccordionPanel label="Büro Ausstattung">
+        </Tab>
+        <Tab title="Büro">
           <Box direction="row">
             <Box pad="small" basis="medium">
               <FormField
@@ -198,8 +198,8 @@ function Form() {
               />
             </Box>
           </Box>
-        </AccordionPanel>
-      </Accordion>
+        </Tab>
+      </Tabs>
     </Box>
   );
 }

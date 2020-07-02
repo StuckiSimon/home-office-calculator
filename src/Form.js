@@ -137,7 +137,13 @@ function Form() {
                   <Box direction="row" align="center">
                     Mietpreis pro m<sup>2</sup>&nbsp;Bürofläche
                     <Tippy
-                      content="Quelle: https://de.statista.com/statistik/daten/studie/505317/umfrage/durchschnittsmieten-fuer-bueroflaechen-in-den-20-groessten-schweizer-agglomerationen/"
+                      content={
+                        <>
+                          Quelle:
+                          https://de.statista.com/statistik/daten/studie/505317/umfrage/durchschnittsmieten-fuer-bueroflaechen-in-den-20-groessten-schweizer-agglomerationen/
+                          "Andere" Daten: Durchschnitt
+                        </>
+                      }
                       interactive
                     >
                       <Box margin={{ horizontal: 'xsmall' }}>
@@ -164,7 +170,13 @@ function Form() {
                   <Box direction="row" align="center">
                     Mietpreis pro Parkplatz
                     <Tippy
-                      content="Quelle: https://www.handelszeitung.ch/unternehmen/parkieren-das-kosten-einstellplatze-den-schweizer-stadten"
+                      content={
+                        <>
+                          Quelle:
+                          https://www.handelszeitung.ch/unternehmen/parkieren-das-kosten-einstellplatze-den-schweizer-stadten
+                          "Andere" Daten: Durchschnitt
+                        </>
+                      }
                       interactive
                     >
                       <Box margin={{ horizontal: 'xsmall' }}>
@@ -192,9 +204,17 @@ function Form() {
             <Box pad="small" basis="medium">
               <FormField
                 label={
-                  <>
+                  <Box direction="row" align="center">
                     Arbeitsfläche pro Mitarbeiter (in m<sup>2</sup>)
-                  </>
+                    <Tippy
+                      content="Quelle Standardwert: https://www.seco.admin.ch/dam/seco/de/dokumente/Arbeit/Arbeitsbedingungen/Arbeitsgesetz%20und%20Verordnungen/Wegleitungen/Wegleitungen%203/ArGV3_art24.pdf.download.pdf/ArGV3_art24_de.pdf"
+                      interactive
+                    >
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Tippy>
+                  </Box>
                 }
               >
                 <TextInput
@@ -211,7 +231,30 @@ function Form() {
             </Box>
             <Box pad="small" basis="medium">
               <SelectFormField
-                label="Heizung"
+                label={
+                  <Box direction="row" align="center">
+                    Heizung
+                    <Tippy
+                      content={
+                        <>
+                          Quellen Öl, Gas:
+                          https://www.klimaneutral-handeln.de/php/kompens-berechnen.php
+                          <br />
+                          Quelle Gas:
+                          https://heizung.de/heizung/tipps/umrechnung-m3-in-kwh-kubikmeter-in-kilowattstunden/
+                          <br />
+                          Quelle Wärmepumpe:
+                          https://www.bafu.admin.ch/bafu/de/home/themen/klima/klimawandel--fragen-und-antworten.html
+                        </>
+                      }
+                      interactive
+                    >
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Tippy>
+                  </Box>
+                }
                 value={selectedHeatingSource}
                 onChange={onHeatingSourceSelect}
                 options={heatingSourcesFormatted}
@@ -219,7 +262,19 @@ function Form() {
             </Box>
             <Box pad="small" basis="medium">
               <SelectFormField
-                label="Energiestandard"
+                label={
+                  <Box direction="row" align="center">
+                    Energiestandard
+                    <Tippy
+                      content="Quelle: https://energie.ch/heizenergieverbrauch/"
+                      interactive
+                    >
+                      <Box margin={{ horizontal: 'xsmall' }}>
+                        <StatusInfo size="small" color="brand" />
+                      </Box>
+                    </Tippy>
+                  </Box>
+                }
                 value={selectedEnergyStandard}
                 onChange={onEnergyStandardSelect}
                 options={energyStandardsFormatted}

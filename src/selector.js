@@ -6,8 +6,18 @@ import {
   homeOfficeDaysState,
   locationParkingPriceState,
   locationSqmPriceState,
+  officeEnergyStandardState,
+  officeHeatingSourceState,
 } from './state';
-import { COMMUTE_MIX_CAR_INDEX, HEATING_COST_PER_M2 } from './constants';
+import {
+  COMMUTE_EMISSIONS,
+  COMMUTE_MIX_CAR_INDEX,
+  DAILY_COMMUTE_DISTANCE_KM,
+  DAYS_PER_MONTH,
+  HEATING_COST_PER_M2,
+} from './constants';
+import buildingEnergyStandards from './reference/buildingEnergyStandards.json';
+import heatingSources from './reference/heatingSources.json';
 
 const WORK_DAYS = 5;
 
@@ -106,6 +116,51 @@ export const parkingPriceSelector = selector({
     return getCalculation(
       (places) => {
         return Math.round(carPercentage * places) * parkingPrice;
+      },
+      { get }
+    );
+  },
+});
+
+// in g CO2
+export const officeHeatingEmissionsSelector = selector({
+  key: 'officeHeatingEmissionsSelector',
+  get: ({ get }) => {
+    const areaPerEmployee = get(employeeAreaState);
+    const energyStandard = get(officeEnergyStandardState);
+    const energyStandardPowerPerM2 =
+      buildingEnergyStandards[energyStandard].value;
+    const heatingSource = get(officeHeatingSourceState);
+    const heatingSourceCo2PerPowerUnit = heatingSources[heatingSource].value;
+    return getCalculation(
+      (places) => {
+        return Math.round(
+          officeSpace(places, areaPerEmployee) *
+            energyStandardPowerPerM2 *
+            heatingSourceCo2PerPowerUnit
+        );
+      },
+      { get }
+    );
+  },
+});
+
+export const commuteEmissionsSelector = selector({
+  key: 'commuteEmissionsSelector',
+  get: ({ get }) => {
+    const commuteMix = get(commuteMixState);
+    const avgEmissionsPerKm = commuteMix
+      .map((prob, i) => COMMUTE_EMISSIONS[i] * prob)
+      .reduce((acc, emission) => acc + emission, 0);
+
+    return getCalculation(
+      (places) => {
+        return Math.round(
+          avgEmissionsPerKm *
+            places *
+            DAILY_COMMUTE_DISTANCE_KM *
+            DAYS_PER_MONTH
+        );
       },
       { get }
     );

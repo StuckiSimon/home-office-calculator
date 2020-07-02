@@ -9,6 +9,8 @@ import {
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import {
+  commuteEmissionsSelector,
+  officeHeatingEmissionsSelector,
   officeHeatingPriceSelector,
   officeRentSelector,
   parkingPriceSelector,
@@ -62,6 +64,33 @@ function Stats() {
       label: 'Wärmeenergie',
     },
   ];
+
+  const officeHeatingEmissions = useRecoilValue(officeHeatingEmissionsSelector);
+  const commuteEmissions = useRecoilValue(commuteEmissionsSelector);
+  const totalOptimalEmissions =
+    officeHeatingEmissions.optimal + commuteEmissions.optimal;
+  const totalDiffEmissions =
+    officeHeatingEmissions.diff + commuteEmissions.diff;
+  const emissionDistribution = [
+    {
+      value: getAsPercentage(totalOptimalEmissions, commuteEmissions.optimal),
+      color: 'graph-0',
+      label: 'Mobilität',
+    },
+    {
+      value: getAsPercentage(
+        totalOptimalEmissions,
+        officeHeatingEmissions.optimal
+      ),
+      color: 'brand',
+      label: 'Wärmeenergie',
+    },
+  ];
+  const totalEmissionPercentage = getCalcAsPercentage(
+    officeHeatingEmissions.normal + commuteEmissions.normal,
+    officeHeatingEmissions.optimal + commuteEmissions.optimal,
+    officeHeatingEmissions.diff + commuteEmissions.diff
+  );
 
   return (
     <Box direction="column" pad="medium">
@@ -130,7 +159,60 @@ function Stats() {
             ]}
           />
         </AccordionPanel>
-        <AccordionPanel label="Ökologie" />
+        <AccordionPanel label="Ökologie">
+          <Box direction="row">
+            <Box pad="small" basis="full">
+              <Heading level="6" margin="none">
+                Anteil an Emissionen
+              </Heading>
+              <PercentageDistribution values={emissionDistribution} />
+            </Box>
+            <Box pad="small">
+              <Heading level="6" margin="none">
+                Emissionsreduktion
+              </Heading>
+              <StatMeter
+                size="medium"
+                max={totalEmissionPercentage.normal}
+                current={totalEmissionPercentage.optimal}
+                diff={
+                  <>
+                    -{Math.round(totalDiffEmissions / 1000)} kg CO<sub>2</sub>
+                  </>
+                }
+              />
+            </Box>
+          </Box>
+          <DataTable
+            columns={[
+              {
+                property: 'name',
+                header: <Text>Name</Text>,
+                primary: true,
+              },
+              {
+                property: 'diff',
+                header: 'Gespart',
+                footer: '' + Math.round(totalDiffEmissions / 1000),
+                render: (data) => (
+                  <>
+                    {data.diff} kg CO<sub>2</sub>
+                  </>
+                ),
+              },
+            ]}
+            data={[
+              {
+                name: 'Mobilität',
+                diff: Math.round(commuteEmissions.diff / 1000),
+              },
+              {
+                name: 'Wärmeenergie',
+                diff: Math.round(officeHeatingEmissions.diff / 1000),
+              },
+            ]}
+          />
+        </AccordionPanel>
         <AccordionPanel label="Sozial" />
       </Accordion>
     </Box>

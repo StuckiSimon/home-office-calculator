@@ -27,7 +27,7 @@ function StatMeter({ max, current, diff }) {
           ]}
         />
         <FactContainer>
-          <Heading>-{diff}</Heading>
+          <Heading level={3}>-{diff}</Heading>
         </FactContainer>
       </div>
     </div>

@@ -1,10 +1,15 @@
 import { selector } from 'recoil';
-import { employeeCountState, homeOfficeDaysState } from './state';
+import {
+  employeeAreaState,
+  employeeCountState,
+  homeOfficeDaysState,
+} from './state';
 
 const WORK_DAYS = 5;
 
-const getAreaForEmployees = (employees) => {
-  return 6 + employees * 6;
+const getAreaForEmployees = (employees, { get }) => {
+  const m2 = get(employeeAreaState);
+  return employees * m2;
 };
 
 const optimalWorkplaceCountState = selector({
@@ -17,9 +22,9 @@ const optimalWorkplaceCountState = selector({
   },
 });
 
-const getWorkplaceStatsFor = (workplaceCount) => ({
+const getWorkplaceStatsFor = (workplaceCount, opts) => ({
   workplaces: workplaceCount,
-  area: getAreaForEmployees(workplaceCount),
+  area: getAreaForEmployees(workplaceCount, opts),
 });
 
 export const workSpaceState = selector({
@@ -28,8 +33,12 @@ export const workSpaceState = selector({
     const normalWorkplaceCount = get(employeeCountState);
     const optimalWorkplaceCount = get(optimalWorkplaceCountState);
 
-    const normalWorkplaceStats = getWorkplaceStatsFor(normalWorkplaceCount);
-    const optimalWorkplaceStats = getWorkplaceStatsFor(optimalWorkplaceCount);
+    const normalWorkplaceStats = getWorkplaceStatsFor(normalWorkplaceCount, {
+      get,
+    });
+    const optimalWorkplaceStats = getWorkplaceStatsFor(optimalWorkplaceCount, {
+      get,
+    });
 
     return {
       normal: normalWorkplaceStats,

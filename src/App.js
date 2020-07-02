@@ -39,9 +39,7 @@ function App() {
           </header>
         </div>
         <div>
-          <Box direction="row" pad="medium">
-            <Stats />
-          </Box>
+          <Stats />
         </div>
       </Grommet>
     </RecoilRoot>

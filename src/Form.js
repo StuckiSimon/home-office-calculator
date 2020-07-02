@@ -10,6 +10,7 @@ import React from 'react';
 import Select from 'react-select';
 import { useRecoilState } from 'recoil';
 import {
+  employeeAreaState,
   employeeCountState,
   homeOfficeDaysState,
   locationState,
@@ -21,6 +22,7 @@ function Form() {
   const [homeOfficeDays, setHomeOfficeDays] = useRecoilState(
     homeOfficeDaysState
   );
+  const [employeeArea, setEmployeeArea] = useRecoilState(employeeAreaState);
   const [location, setLocation] = useRecoilState(locationState);
   const citiesFormatted = Object.entries(cities).map(([key, label]) => ({
     value: key,
@@ -81,7 +83,24 @@ function Form() {
             </Box>
           </Box>
         </AccordionPanel>
-        <AccordionPanel label="Büro Ausstattung" />
+        <AccordionPanel label="Büro Ausstattung">
+          <Box direction="row">
+            <Box pad="small" basis="medium">
+              <FormField label="Arbeitsfläche pro Mitarbeiter (in m^2)">
+                <TextInput
+                  placeholder="0"
+                  min={5}
+                  max={40}
+                  type="number"
+                  value={employeeArea}
+                  onChange={(e) => {
+                    setEmployeeArea(e.target.value);
+                  }}
+                />
+              </FormField>
+            </Box>
+          </Box>
+        </AccordionPanel>
         <AccordionPanel label="Mobilität" />
       </Accordion>
     </Box>

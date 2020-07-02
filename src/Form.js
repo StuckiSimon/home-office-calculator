@@ -196,7 +196,6 @@ function Form() {
             </Box>
           </Box>
         </AccordionPanel>
-        <AccordionPanel label="Mobilität" />
       </Accordion>
     </Box>
   );

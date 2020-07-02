@@ -20,9 +20,9 @@ const AppHeader = () => (
         Homeoffice Rechner
       </Heading>
       <Text>
-        Der Homeoffice Rechner ermöglicht es Dienstleitungsbetrieben in der
-        Schweiz den Nutzen von Homeoffice abzuschätzen. Der Rechner ist für KMUs
-        welche primär am Computer arbeiten geeignet.
+        Der Homeoffice Rechner ermöglicht Schweizer Dienstleistungsbetrieben den
+        Nutzen von Homeoffice abzuschätzen. Der Rechner ist für KMUs, welche
+        primär am Computer arbeiten, geeignet.
       </Text>
     </Box>
   </Box>

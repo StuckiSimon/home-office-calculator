@@ -166,6 +166,7 @@ function Stats() {
             </Box>
           </Box>
           <DataTable
+            margin={{ vertical: 'medium' }}
             columns={[
               {
                 property: 'name',
@@ -211,6 +212,7 @@ function Stats() {
             </Box>
           </Box>
           <DataTable
+            margin={{ vertical: 'medium' }}
             columns={[
               {
                 property: 'name',

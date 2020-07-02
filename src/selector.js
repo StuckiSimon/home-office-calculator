@@ -16,11 +16,10 @@ import {
   DAILY_COMMUTE_TIME_MINUTES,
   DAYS_PER_MONTH,
   HEATING_COST_PER_M2,
+  WORK_DAYS,
 } from './constants';
 import buildingEnergyStandards from './reference/buildingEnergyStandards.json';
 import heatingSources from './reference/heatingSources.json';
-
-const WORK_DAYS = 5;
 
 const optimalWorkplaceCountState = selector({
   key: 'optimalWorkplaceCountState',

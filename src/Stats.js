@@ -5,16 +5,43 @@ import {
   DataTable,
   Distribution,
   Heading,
-  Meter,
   Text,
 } from 'grommet';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { workSpaceState } from './selector';
+import {
+  officeHeatingPriceSelector,
+  officeRentSelector,
+  parkingPriceSelector,
+  workSpaceState,
+} from './selector';
 import StatMeter from './StatMeter';
+
+const getCalcAsPercentage = (normal, optimal, diff) => {
+  return {
+    normal: 100,
+    optimal: getAsPercentage(normal, optimal),
+    diff: getAsPercentage(normal, diff),
+  };
+};
+
+const getAsPercentage = (hundred, asked) => {
+  return Math.round((100 / hundred) * asked);
+};
 
 function Stats() {
   const { normal, optimal, diff } = useRecoilValue(workSpaceState);
+  const officeRent = useRecoilValue(officeRentSelector);
+  const heatingPrice = useRecoilValue(officeHeatingPriceSelector);
+  const parkingPrice = useRecoilValue(parkingPriceSelector);
+
+  const totalPricePercentage = getCalcAsPercentage(
+    officeRent.normal + heatingPrice.normal + parkingPrice.normal,
+    officeRent.optimal + heatingPrice.optimal + parkingPrice.optimal,
+    officeRent.diff + heatingPrice.diff + parkingPrice.diff
+  );
+  const optimalTotalPrice =
+    officeRent.optimal + heatingPrice.optimal + parkingPrice.optimal;
 
   return (
     <Box direction="column" pad="medium">
@@ -25,7 +52,7 @@ function Stats() {
           <StatMeter
             max={normal.workplaces}
             current={optimal.workplaces}
-            diff={diff.workplaces}
+            diff={-diff.workplaces}
           />
         </Box>
         <Box pad="xsmall">
@@ -35,7 +62,7 @@ function Stats() {
             current={optimal.area}
             diff={
               <>
-                {diff.area}m<sup>2</sup>
+                -{diff.area}m<sup>2</sup>
               </>
             }
           />
@@ -44,22 +71,58 @@ function Stats() {
       <Accordion multiple basis="full">
         <AccordionPanel label="Ökonomie">
           <Box direction="row">
-            <Distribution
-              values={[
-                { value: 50, color: 'light-3', label: 'Immobilien' },
-                { value: 35, color: 'brand', label: 'Wärmeenergie' },
-                { value: 15, color: 'graph-0', label: 'Parkplätze' },
-              ]}
-            >
-              {(value) => (
-                <Box pad="small" background={value.color} fill>
-                  <Text size="large">
-                    {value.value}% {value.label}
-                  </Text>
-                </Box>
-              )}
-            </Distribution>
-            <StatMeter max={100} current={60} diff={<>40%</>} />
+            <Box pad="small" basis="full">
+              <Heading level="6" margin="none">
+                Kostenverteilung
+              </Heading>
+              <Distribution
+                values={[
+                  {
+                    value: getAsPercentage(
+                      optimalTotalPrice,
+                      officeRent.optimal
+                    ),
+                    color: 'accent-3',
+                    label: 'Immobilien',
+                  },
+                  {
+                    value: getAsPercentage(
+                      optimalTotalPrice,
+                      parkingPrice.optimal
+                    ),
+                    color: 'graph-0',
+                    label: 'Parkplätze',
+                  },
+                  {
+                    value: getAsPercentage(
+                      optimalTotalPrice,
+                      heatingPrice.optimal
+                    ),
+                    color: 'brand',
+                    label: 'Wärmeenergie',
+                  },
+                ]}
+              >
+                {(value) => (
+                  <Box pad="small" background={value.color} fill>
+                    <Text size="large">
+                      {value.value}% {value.label}
+                    </Text>
+                  </Box>
+                )}
+              </Distribution>
+            </Box>
+            <Box pad="small">
+              <Heading level="6" margin="none">
+                Kostenreduktion
+              </Heading>
+              <StatMeter
+                size="medium"
+                max={totalPricePercentage.normal}
+                current={totalPricePercentage.optimal}
+                diff={<>-{totalPricePercentage.diff}%</>}
+              />
+            </Box>
           </Box>
           <DataTable
             columns={[
@@ -69,23 +132,15 @@ function Stats() {
                 primary: true,
               },
               {
-                property: 'percent',
+                property: 'diff',
                 header: 'Gespart',
-                render: (datum) => (
-                  <Box pad={{ vertical: 'xsmall' }}>
-                    <Meter
-                      values={[{ value: datum.percent }]}
-                      thickness="small"
-                      size="small"
-                    />
-                  </Box>
-                ),
+                render: (data) => data.diff + ' CHF',
               },
             ]}
             data={[
-              { name: 'Immobilien', percent: 20 },
-              { name: 'Wärmeenergie', percent: 30 },
-              { name: 'Parkplätze', percent: 40 },
+              { name: 'Immobilien', diff: officeRent.diff },
+              { name: 'Wärmeenergie', diff: heatingPrice.diff },
+              { name: 'Parkplätze', diff: parkingPrice.diff },
             ]}
           />
         </AccordionPanel>

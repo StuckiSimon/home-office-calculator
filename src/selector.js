@@ -1,9 +1,13 @@
 import { selector } from 'recoil';
 import {
+  commuteMixState,
   employeeAreaState,
   employeeCountState,
   homeOfficeDaysState,
+  locationParkingPriceState,
+  locationSqmPriceState,
 } from './state';
+import { COMMUTE_MIX_CAR_INDEX, HEATING_COST_PER_M2 } from './constants';
 
 const WORK_DAYS = 5;
 
@@ -49,5 +53,61 @@ export const workSpaceState = selector({
         area: normalWorkplaceStats.area - optimalWorkplaceStats.area,
       },
     };
+  },
+});
+
+/**
+ * used for obtaining normal, optimal & diff values
+ */
+const getCalculation = (selector, { get }) => {
+  const normalWorkplaceCount = get(employeeCountState);
+  const optimalWorkplaceCount = get(optimalWorkplaceCountState);
+
+  const normal = selector(normalWorkplaceCount, { get });
+  const optimal = selector(optimalWorkplaceCount, { get });
+  const diff = normal - optimal;
+  return { normal, optimal, diff };
+};
+
+const officeSpace = (places, areaPerEmployee) => places * areaPerEmployee;
+
+export const officeRentSelector = selector({
+  key: 'officeRentSelector',
+  get: ({ get }) => {
+    const areaPerEmployee = get(employeeAreaState);
+    const locationSqmPrice = get(locationSqmPriceState);
+    return getCalculation(
+      (places) => {
+        return officeSpace(places, areaPerEmployee) * locationSqmPrice;
+      },
+      { get }
+    );
+  },
+});
+
+export const officeHeatingPriceSelector = selector({
+  key: 'officeHeatingPriceSelector',
+  get: ({ get }) => {
+    const areaPerEmployee = get(employeeAreaState);
+    return getCalculation(
+      (places) => {
+        return officeSpace(places, areaPerEmployee) * HEATING_COST_PER_M2;
+      },
+      { get }
+    );
+  },
+});
+
+export const parkingPriceSelector = selector({
+  key: 'parkingPriceSelector',
+  get: ({ get }) => {
+    const carPercentage = get(commuteMixState)[COMMUTE_MIX_CAR_INDEX];
+    const parkingPrice = get(locationParkingPriceState);
+    return getCalculation(
+      (places) => {
+        return Math.round(carPercentage * places) * parkingPrice;
+      },
+      { get }
+    );
   },
 });

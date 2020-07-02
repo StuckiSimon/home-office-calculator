@@ -43,3 +43,9 @@ export const officeHeatingSourceState = atom({
   key: 'officeHeatingSourceState',
   default: 'oil',
 });
+
+// Must be referenced by index constants
+export const commuteMixState = atom({
+  key: 'commuteMixState',
+  default: [0.52, 0.17, 0.14, 0.07, 0.09],
+});

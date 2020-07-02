@@ -9,7 +9,7 @@ const FactContainer = styled.div`
   transform: translate3d(-50%, -50%, 0);
 `;
 
-function StatMeter({ max, current, diff }) {
+function StatMeter({ max, current, diff, size = 'small' }) {
   return (
     <div>
       <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -18,7 +18,7 @@ function StatMeter({ max, current, diff }) {
           background="status-ok"
           round
           max={max}
-          size="small"
+          size={size}
           values={[
             {
               color: 'accent-4',
@@ -27,7 +27,7 @@ function StatMeter({ max, current, diff }) {
           ]}
         />
         <FactContainer>
-          <Heading level={3}>-{diff}</Heading>
+          <Heading level={3}>{diff}</Heading>
         </FactContainer>
       </div>
     </div>

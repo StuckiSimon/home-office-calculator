@@ -24,10 +24,6 @@ const AppHeader = () => (
         Schweiz den Nutzen von Homeoffice abzuschätzen. Der Rechner ist für KMUs
         welche primär am Computer arbeiten geeignet.
       </Text>
-      <Text color="dark-6">
-        Für den Einsatz bei Grossbetrieben oder handwerklichen Unternehmen ist
-        er nicht geeignet.
-      </Text>
     </Box>
   </Box>
 );

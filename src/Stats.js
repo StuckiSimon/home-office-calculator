@@ -18,23 +18,25 @@ function Stats() {
     <>
       <Box pad="small">
         <Heading size="small">Arbeitsplätze</Heading>
-        <div style={{ position: 'relative' }}>
-          <Meter
-            type="circle"
-            background="status-ok"
-            round
-            max={normal.workplaces}
-            size="small"
-            values={[
-              {
-                color: 'accent-4',
-                value: optimal.workplaces,
-              },
-            ]}
-          />
-          <FactContainer>
-            <Heading>-{diff.workplaces}</Heading>
-          </FactContainer>
+        <div>
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <Meter
+              type="circle"
+              background="status-ok"
+              round
+              max={normal.workplaces}
+              size="small"
+              values={[
+                {
+                  color: 'accent-4',
+                  value: optimal.workplaces,
+                },
+              ]}
+            />
+            <FactContainer>
+              <Heading>-{diff.workplaces}</Heading>
+            </FactContainer>
+          </div>
         </div>
       </Box>
     </>

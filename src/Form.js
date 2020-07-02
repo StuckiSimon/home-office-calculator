@@ -133,7 +133,13 @@ function Form() {
         <AccordionPanel label="Büro Ausstattung">
           <Box direction="row">
             <Box pad="small" basis="medium">
-              <FormField label="Arbeitsfläche pro Mitarbeiter (in m^2)">
+              <FormField
+                label={
+                  <>
+                    Arbeitsfläche pro Mitarbeiter (in m<sup>2</sup>)
+                  </>
+                }
+              >
                 <TextInput
                   placeholder="0"
                   min={5}

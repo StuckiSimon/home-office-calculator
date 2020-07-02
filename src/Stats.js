@@ -43,6 +43,24 @@ function Stats() {
   const optimalTotalPrice =
     officeRent.optimal + heatingPrice.optimal + parkingPrice.optimal;
 
+  const pricingDistribution = [
+    {
+      value: getAsPercentage(optimalTotalPrice, officeRent.optimal),
+      color: 'accent-3',
+      label: 'Immobilien',
+    },
+    {
+      value: getAsPercentage(optimalTotalPrice, parkingPrice.optimal),
+      color: 'graph-0',
+      label: 'Parkplätze',
+    },
+    {
+      value: getAsPercentage(optimalTotalPrice, heatingPrice.optimal),
+      color: 'brand',
+      label: 'Wärmeenergie',
+    },
+  ].sort(({ value: a }, { value: b }) => b - a);
+
   return (
     <Box direction="column" pad="medium">
       <Heading size="small">Auswertung</Heading>
@@ -75,34 +93,7 @@ function Stats() {
               <Heading level="6" margin="none">
                 Kostenverteilung
               </Heading>
-              <Distribution
-                values={[
-                  {
-                    value: getAsPercentage(
-                      optimalTotalPrice,
-                      officeRent.optimal
-                    ),
-                    color: 'accent-3',
-                    label: 'Immobilien',
-                  },
-                  {
-                    value: getAsPercentage(
-                      optimalTotalPrice,
-                      parkingPrice.optimal
-                    ),
-                    color: 'graph-0',
-                    label: 'Parkplätze',
-                  },
-                  {
-                    value: getAsPercentage(
-                      optimalTotalPrice,
-                      heatingPrice.optimal
-                    ),
-                    color: 'brand',
-                    label: 'Wärmeenergie',
-                  },
-                ]}
-              >
+              <Distribution values={pricingDistribution}>
                 {(value) => (
                   <Box pad="small" background={value.color} fill>
                     <Text size="large">

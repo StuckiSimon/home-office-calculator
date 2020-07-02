@@ -6,20 +6,10 @@ import Stats from './Stats';
 import MainContainer from './visual/MainContainer';
 import AppHeader from './visual/AppHeader';
 
-const theme = {
-  global: {
-    font: {
-      family: 'Roboto',
-      size: '14px',
-      height: '20px',
-    },
-  },
-};
-
 function App() {
   return (
     <RecoilRoot>
-      <Grommet theme={theme}>
+      <Grommet>
         <MainContainer>
           <AppHeader />
           <Form />

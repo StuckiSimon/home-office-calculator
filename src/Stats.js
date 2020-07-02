@@ -3,7 +3,6 @@ import {
   AccordionPanel,
   Box,
   DataTable,
-  Distribution,
   Heading,
   Text,
 } from 'grommet';
@@ -16,6 +15,7 @@ import {
   workSpaceState,
 } from './selector';
 import StatMeter from './StatMeter';
+import PercentageDistribution from './PercentageDistribution';
 
 const getCalcAsPercentage = (normal, optimal, diff) => {
   return {
@@ -61,7 +61,7 @@ function Stats() {
       color: 'brand',
       label: 'Wärmeenergie',
     },
-  ].sort(({ value: a }, { value: b }) => b - a);
+  ];
 
   return (
     <Box direction="column" pad="medium">
@@ -95,15 +95,7 @@ function Stats() {
               <Heading level="6" margin="none">
                 Kostenverteilung
               </Heading>
-              <Distribution values={pricingDistribution}>
-                {(value) => (
-                  <Box pad="small" background={value.color} fill>
-                    <Text size="large">
-                      {value.value}% {value.label}
-                    </Text>
-                  </Box>
-                )}
-              </Distribution>
+              <PercentageDistribution values={pricingDistribution} />
             </Box>
             <Box pad="small">
               <Heading level="6" margin="none">

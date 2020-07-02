@@ -17,8 +17,8 @@ import {
   parkingPriceSelector,
   workSpaceState,
 } from './selector';
-import StatMeter from './StatMeter';
-import PercentageDistribution from './PercentageDistribution';
+import StatMeter from './visual/StatMeter';
+import PercentageDistribution from './visual/PercentageDistribution';
 
 const getCalcAsPercentage = (normal, optimal, diff) => {
   return {

@@ -18,8 +18,8 @@ import officeSpaceRentPrices from './reference/officeSpaceRentPrices.json';
 import buildingEnergyStandards from './reference/buildingEnergyStandards.json';
 import heatingSources from './reference/heatingSources.json';
 import { employeeCountValidator } from './validators';
-import ValidatedFormField from './ValidatedFormField';
-import SelectFormField from './SelectFormField';
+import ValidatedFormField from './visual/ValidatedFormField';
+import SelectFormField from './visual/SelectFormField';
 
 function Form() {
   const [employees, setEmployees] = useRecoilState(employeeCountState);

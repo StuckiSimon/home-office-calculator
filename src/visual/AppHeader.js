@@ -14,7 +14,13 @@ const AppHeader = () => (
         horizontal: 'small',
       }}
     >
-      <Heading margin="none">Homeoffice Rechner</Heading>
+      <Heading
+        margin={{
+          vertical: 'small',
+        }}
+      >
+        Homeoffice Rechner
+      </Heading>
       <Text>
         Der Homeoffice Rechner ermöglicht es Dienstleitungsbetrieben den Nutzen
         von Homeoffice abzuschätzen. Der Rechner ist für KMUs, welche primär

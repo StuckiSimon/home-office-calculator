@@ -13,9 +13,13 @@ import {
   employeeAreaState,
   employeeCountState,
   homeOfficeDaysState,
+  locationParkingPriceState,
+  locationSqmPriceState,
   locationState,
 } from './state';
 import cities from './reference/cities.json';
+import parkingPrices from './reference/parkingPrices.json';
+import officeSpaceRentPrices from './reference/officeSpaceRentPrices.json';
 
 function Form() {
   const [employees, setEmployees] = useRecoilState(employeeCountState);
@@ -29,7 +33,18 @@ function Form() {
     label,
   }));
   const selectedCity = citiesFormatted.find((city) => city.value === location);
+  const [locationSqmPrice, setLocationSqmPrice] = useRecoilState(
+    locationSqmPriceState
+  );
+  const [locationParkingPrice, setLocationParkingPrice] = useRecoilState(
+    locationParkingPriceState
+  );
 
+  const onLocationSelect = ({ value }) => {
+    setLocation(value);
+    setLocationParkingPrice(parkingPrices[value]);
+    setLocationSqmPrice(officeSpaceRentPrices[value]);
+  };
   return (
     <Box direction="column" pad="medium">
       <Accordion multiple basis="full">
@@ -75,11 +90,43 @@ function Form() {
                   <Select
                     menuPortalTarget={document.body}
                     value={selectedCity}
-                    onChange={({ value }) => setLocation(value)}
+                    onChange={onLocationSelect}
                     options={citiesFormatted}
                   />
                 </FormField>
               </ThemeContext.Extend>
+            </Box>
+            <Box pad="small">
+              <FormField
+                label={
+                  <>
+                    Mietpreis pro m<sup>2</sup> Bürofläche
+                  </>
+                }
+              >
+                <TextInput
+                  min={0}
+                  max={500}
+                  type="number"
+                  value={locationSqmPrice}
+                  onChange={(e) => {
+                    setLocationSqmPrice(e.target.value);
+                  }}
+                />
+              </FormField>
+            </Box>
+            <Box pad="small">
+              <FormField label={<>Mietpreis pro Parkplatz</>}>
+                <TextInput
+                  min={0}
+                  max={500}
+                  type="number"
+                  value={locationParkingPrice}
+                  onChange={(e) => {
+                    setLocationParkingPrice(e.target.value);
+                  }}
+                />
+              </FormField>
             </Box>
           </Box>
         </AccordionPanel>

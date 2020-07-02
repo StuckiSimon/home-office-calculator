@@ -90,7 +90,7 @@ function Form() {
               />
             </Box>
             <Box pad="small">
-              <FormField label="# Home Office Days">
+              <FormField label="Tage Homeoffice / Woche">
                 <TextInput
                   placeholder="1-4"
                   min={1}
@@ -98,7 +98,10 @@ function Form() {
                   type="number"
                   value={homeOfficeDays}
                   onChange={(e) => {
-                    setHomeOfficeDays(e.target.value);
+                    const homeOfficeDays = parseInt(e.target.value, 10) || 0;
+                    setHomeOfficeDays(
+                      homeOfficeDays === 5 ? 4 : homeOfficeDays
+                    );
                   }}
                 />
               </FormField>

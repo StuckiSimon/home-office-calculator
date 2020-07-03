@@ -34,10 +34,7 @@ function Stats() {
       </Box>
       <Box direction="row">
         <Box pad="xsmall">
-          <Fact
-            label="Arbeitsplätze weniger"
-            value={workSpaces.diff.toLocaleString('de-CH')}
-          />
+          <Fact label="Arbeitsplätze weniger" value={workSpaces.diff} />
         </Box>
         <Box pad="xsmall">
           <Fact
@@ -46,15 +43,13 @@ function Stats() {
                 kg CO<sub>2</sub> weniger
               </>
             }
-            value={Math.round(totalDiffEmissions / 1000).toLocaleString(
-              'de-CH'
-            )}
+            value={Math.round(totalDiffEmissions / 1000)}
           />
         </Box>
         <Box pad="xsmall">
           <Fact
             label="h mehr Freizeit"
-            value={Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}
+            value={Math.round(commuteTime.diff / 60)}
           />
         </Box>
       </Box>

@@ -22,19 +22,14 @@ const Social = () => {
         />
       </Box>
       <Box pad="small" justify="end">
-        <Fact
-          label="Kuchen backen"
-          value={Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}
-        />
+        <Fact label="Kuchen backen" value={Math.round(commuteTime.diff / 60)} />
         <Fact
           label="Marathons laufen"
-          value={Math.round(commuteTime.diff / 120).toLocaleString('de-CH')}
+          value={Math.round(commuteTime.diff / 120)}
         />
         <Fact
           label="TGV-Fahrten Zurich - Paris"
-          value={Math.round(commuteTime.diff / (60 * 4)).toLocaleString(
-            'de-CH'
-          )}
+          value={Math.round(commuteTime.diff / (60 * 4))}
         />
       </Box>
     </Box>

@@ -28,6 +28,11 @@ const warn = (message) => ({
   message,
 });
 
+const info = (message) => ({
+  type: 'info',
+  message,
+});
+
 const probe = (prober, validationObject) => ({
   prober,
   validationObject,
@@ -58,6 +63,12 @@ export const homeOfficeDaysValidator = selector({
     return validate(homeOfficeDays, [
       probe(ow.number.positive, error('Zahl muss positiv sein')),
       probe(ow.number.lessThan(5), error('Die Zahl muss tiefer als 5 sein')),
+      probe(
+        ow.number.lessThan(3),
+        info(
+          'Wenn sie primär Remote arbeiten möchten, sollten Sie die Akzeptanz bei den Mitarbeitern abklären.'
+        )
+      ),
     ]);
   },
 });

@@ -93,7 +93,7 @@ function Form() {
                 validationObject={employeeCountValidation}
               />
             </Box>
-            <Box pad="small">
+            <Box pad="small" basis="medium">
               <ValidatedFormField
                 placeholder="1-4"
                 label="Tage Homeoffice / Woche"

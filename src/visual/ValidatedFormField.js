@@ -1,7 +1,7 @@
 import { Box, FormField, Text, TextInput } from 'grommet';
 import styled from 'styled-components';
 import React from 'react';
-import { Alert, StatusCritical } from 'grommet-icons';
+import { Alert, StatusCritical, StatusInfo } from 'grommet-icons';
 
 const ValidationPlaceholder = styled.div`
   min-height: 40px;
@@ -9,6 +9,8 @@ const ValidationPlaceholder = styled.div`
 
 const ValidationIcon = ({ children }) => {
   switch (children) {
+    case 'info':
+      return <StatusInfo color="brand" />;
     case 'warning':
       return <Alert color="status-warning" />;
     case 'error':

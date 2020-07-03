@@ -178,6 +178,7 @@ function Stats() {
                 primary: true,
               },
               {
+                align: 'end',
                 property: 'diff',
                 header: 'Gespart',
                 footer: '' + diffTotalPrice.toLocaleString('de-CH'),
@@ -228,6 +229,7 @@ function Stats() {
                 primary: true,
               },
               {
+                align: 'end',
                 property: 'diff',
                 header: 'Gespart',
                 footer:

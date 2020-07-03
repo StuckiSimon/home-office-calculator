@@ -165,7 +165,7 @@ function Stats() {
               <StatMeter
                 max={totalPricePercentage.normal}
                 current={totalPricePercentage.optimal}
-                diff={<>-{totalPricePercentage.diff}%</>}
+                diff={<>{totalPricePercentage.diff}%</>}
               />
             </Box>
           </Box>
@@ -242,7 +242,6 @@ function Stats() {
                 current={totalEmissionPercentage.optimal}
                 diff={
                   <>
-                    -
                     {Math.round(totalDiffEmissions / 1000).toLocaleString(
                       'de-CH'
                     )}{' '}
@@ -324,8 +323,7 @@ function Stats() {
                 current={commuteTime.optimal}
                 diff={
                   <>
-                    -{Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}
-                    h
+                    {Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}h
                   </>
                 }
               />

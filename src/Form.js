@@ -1,8 +1,6 @@
 import { Box, FormField, Tab, Tabs, TextInput } from 'grommet';
-import { StatusInfo } from 'grommet-icons';
 import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import Tippy from '@tippyjs/react';
 import {
   commuteTimeState,
   employeeAreaState,
@@ -22,6 +20,7 @@ import heatingSources from './reference/heatingSources.json';
 import { employeeCountValidator, homeOfficeDaysValidator } from './validators';
 import ValidatedFormField from './visual/ValidatedFormField';
 import SelectFormField from './visual/SelectFormField';
+import TooltipLabel from './visual/TooltipLabel';
 
 function Form() {
   const [employees, setEmployees] = useRecoilState(employeeCountState);
@@ -116,17 +115,10 @@ function Form() {
             <Box pad="small" basis="medium">
               <SelectFormField
                 label={
-                  <Box direction="row" align="center">
-                    Ortschaft
-                    <Tippy
-                      content="Ortschaft wird verwendet um Mietpreis Bürofläche und Parkplatz zu wählen."
-                      interactive
-                    >
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
-                    </Tippy>
-                  </Box>
+                  <TooltipLabel
+                    label="Ortschaft"
+                    tooltip="Ortschaft wird verwendet um Mietpreis Bürofläche und Parkplatz zu wählen."
+                  />
                 }
                 value={selectedCity}
                 onChange={onLocationSelect}
@@ -136,23 +128,21 @@ function Form() {
             <Box pad="small" basis="medium">
               <FormField
                 label={
-                  <Box direction="row" align="center">
-                    Mietpreis pro m<sup>2</sup>&nbsp;Bürofläche
-                    <Tippy
-                      content={
-                        <>
-                          Quelle:
-                          https://de.statista.com/statistik/daten/studie/505317/umfrage/durchschnittsmieten-fuer-bueroflaechen-in-den-20-groessten-schweizer-agglomerationen/
-                          "Andere" Daten: Durchschnitt
-                        </>
-                      }
-                      interactive
-                    >
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
-                    </Tippy>
-                  </Box>
+                  <TooltipLabel
+                    label={
+                      <>
+                        Mietpreis pro m<sup>2</sup>&nbsp;Bürofläche
+                      </>
+                    }
+                    tooltip={
+                      <>
+                        Quelle:
+                        https://de.statista.com/statistik/daten/studie/505317/umfrage/durchschnittsmieten-fuer-bueroflaechen-in-den-20-groessten-schweizer-agglomerationen/
+                        <br />
+                        "Andere" Daten: Durchschnitt
+                      </>
+                    }
+                  />
                 }
               >
                 <TextInput
@@ -169,23 +159,17 @@ function Form() {
             <Box pad="small">
               <FormField
                 label={
-                  <Box direction="row" align="center">
-                    Mietpreis pro Parkplatz
-                    <Tippy
-                      content={
-                        <>
-                          Quelle:
-                          https://www.handelszeitung.ch/unternehmen/parkieren-das-kosten-einstellplatze-den-schweizer-stadten
-                          "Andere" Daten: Durchschnitt
-                        </>
-                      }
-                      interactive
-                    >
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
-                    </Tippy>
-                  </Box>
+                  <TooltipLabel
+                    label="Mietpreis pro Parkplatz"
+                    tooltip={
+                      <>
+                        Quelle:
+                        https://www.handelszeitung.ch/unternehmen/parkieren-das-kosten-einstellplatze-den-schweizer-stadten
+                        <br />
+                        "Andere" Daten: Durchschnitt
+                      </>
+                    }
+                  />
                 }
               >
                 <TextInput
@@ -206,17 +190,14 @@ function Form() {
             <Box pad="small" basis="medium">
               <FormField
                 label={
-                  <Box direction="row" align="center">
-                    Arbeitsfläche pro Mitarbeiter (in m<sup>2</sup>)
-                    <Tippy
-                      content="Quelle Standardwert: https://www.seco.admin.ch/dam/seco/de/dokumente/Arbeit/Arbeitsbedingungen/Arbeitsgesetz%20und%20Verordnungen/Wegleitungen/Wegleitungen%203/ArGV3_art24.pdf.download.pdf/ArGV3_art24_de.pdf"
-                      interactive
-                    >
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
-                    </Tippy>
-                  </Box>
+                  <TooltipLabel
+                    label={
+                      <>
+                        Arbeitsfläche pro Mitarbeiter (in m<sup>2</sup>)
+                      </>
+                    }
+                    tooltip="Quelle Standardwert: https://www.seco.admin.ch/dam/seco/de/dokumente/Arbeit/Arbeitsbedingungen/Arbeitsgesetz%20und%20Verordnungen/Wegleitungen/Wegleitungen%203/ArGV3_art24.pdf.download.pdf/ArGV3_art24_de.pdf"
+                  />
                 }
               >
                 <TextInput
@@ -234,28 +215,21 @@ function Form() {
             <Box pad="small" basis="medium">
               <SelectFormField
                 label={
-                  <Box direction="row" align="center">
-                    Heizung
-                    <Tippy
-                      content={
-                        <>
-                          Quellen Öl, Gas:
-                          https://www.klimaneutral-handeln.de/php/kompens-berechnen.php
-                          <br />
-                          Quelle Gas:
-                          https://heizung.de/heizung/tipps/umrechnung-m3-in-kwh-kubikmeter-in-kilowattstunden/
-                          <br />
-                          Quelle Wärmepumpe:
-                          https://www.bafu.admin.ch/bafu/de/home/themen/klima/klimawandel--fragen-und-antworten.html
-                        </>
-                      }
-                      interactive
-                    >
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
-                    </Tippy>
-                  </Box>
+                  <TooltipLabel
+                    label="Heizung"
+                    tooltip={
+                      <>
+                        Quellen Öl, Gas:
+                        https://www.klimaneutral-handeln.de/php/kompens-berechnen.php
+                        <br />
+                        Quelle Gas:
+                        https://heizung.de/heizung/tipps/umrechnung-m3-in-kwh-kubikmeter-in-kilowattstunden/
+                        <br />
+                        Quelle Wärmepumpe:
+                        https://www.bafu.admin.ch/bafu/de/home/themen/klima/klimawandel--fragen-und-antworten.html
+                      </>
+                    }
+                  />
                 }
                 value={selectedHeatingSource}
                 onChange={onHeatingSourceSelect}
@@ -265,17 +239,10 @@ function Form() {
             <Box pad="small" basis="medium">
               <SelectFormField
                 label={
-                  <Box direction="row" align="center">
-                    Energiestandard
-                    <Tippy
-                      content="Quelle: https://energie.ch/heizenergieverbrauch/"
-                      interactive
-                    >
-                      <Box margin={{ horizontal: 'xsmall' }}>
-                        <StatusInfo size="small" color="brand" />
-                      </Box>
-                    </Tippy>
-                  </Box>
+                  <TooltipLabel
+                    label="Energiestandard"
+                    tooltip="Quelle: https://energie.ch/heizenergieverbrauch/"
+                  />
                 }
                 value={selectedEnergyStandard}
                 onChange={onEnergyStandardSelect}
@@ -289,17 +256,10 @@ function Form() {
             <ValidatedFormField
               placeholder="in min"
               label={
-                <Box direction="row" align="center">
-                  Tägliche Pendelzeit in Minuten
-                  <Tippy
-                    content="Quelle: https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/pendlermobilitaet.html"
-                    interactive
-                  >
-                    <Box margin={{ horizontal: 'xsmall' }}>
-                      <StatusInfo size="small" color="brand" />
-                    </Box>
-                  </Tippy>
-                </Box>
+                <TooltipLabel
+                  label="Tägliche Pendelzeit in Minuten"
+                  tooltip="Quelle: https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/pendlermobilitaet.html"
+                />
               }
               max={160}
               type="number"

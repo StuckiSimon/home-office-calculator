@@ -1,14 +1,14 @@
 {
   "oil": {
-    "value": 29,
+    "value": 290,
     "label": "Öl"
   },
   "gas": {
-    "value": 20,
+    "value": 200,
     "label": "Gas"
   },
   "pum": {
-    "value": 7.2,
+    "value": 72,
     "label": "Wärmepumpe"
   }
 }

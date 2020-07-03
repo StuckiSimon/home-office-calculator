@@ -323,7 +323,8 @@ function Stats() {
                 current={commuteTime.optimal}
                 diff={
                   <>
-                    {Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}h
+                    {Math.round(commuteTime.diff / 60).toLocaleString('de-CH')}{' '}
+                    h
                   </>
                 }
               />

@@ -7,7 +7,10 @@ import Mobility from './form/Mobility';
 
 function Form() {
   return (
-    <Box direction="row" pad="medium">
+    <Box
+      direction="row"
+      pad={{ top: 'medium', horizontal: 'medium', bottom: 'none' }}
+    >
       <Tabs alignControls="start" flex>
         <Tab title="Unternehmen">
           <Enterprise />

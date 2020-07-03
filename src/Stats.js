@@ -337,13 +337,13 @@ function Stats() {
                 )}
               />
               <Fact
-                label="Fussballspiele"
+                label="Fussballspiele schauen"
                 value={Math.round(commuteTime.diff / 90).toLocaleString(
                   'de-CH'
                 )}
               />
               <Fact
-                label="Marathons"
+                label="Marathons laufen"
                 value={Math.round(commuteTime.diff / 120).toLocaleString(
                   'de-CH'
                 )}

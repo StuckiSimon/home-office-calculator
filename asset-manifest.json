@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/home-office-calculator/static/css/main.8164e364.chunk.css",
+    "main.js": "/home-office-calculator/static/js/main.51bb6083.chunk.js",
+    "main.js.map": "/home-office-calculator/static/js/main.51bb6083.chunk.js.map",
+    "runtime-main.js": "/home-office-calculator/static/js/runtime-main.8813008c.js",
+    "runtime-main.js.map": "/home-office-calculator/static/js/runtime-main.8813008c.js.map",
+    "static/css/2.a8f673c4.chunk.css": "/home-office-calculator/static/css/2.a8f673c4.chunk.css",
+    "static/js/2.e20277c6.chunk.js": "/home-office-calculator/static/js/2.e20277c6.chunk.js",
+    "static/js/2.e20277c6.chunk.js.map": "/home-office-calculator/static/js/2.e20277c6.chunk.js.map",
+    "index.html": "/home-office-calculator/index.html",
+    "precache-manifest.1b074d7c3ede1f88a9f753100c1009a1.js": "/home-office-calculator/precache-manifest.1b074d7c3ede1f88a9f753100c1009a1.js",
+    "service-worker.js": "/home-office-calculator/service-worker.js",
+    "static/css/2.a8f673c4.chunk.css.map": "/home-office-calculator/static/css/2.a8f673c4.chunk.css.map",
+    "static/css/main.8164e364.chunk.css.map": "/home-office-calculator/static/css/main.8164e364.chunk.css.map",
+    "static/js/2.e20277c6.chunk.js.LICENSE.txt": "/home-office-calculator/static/js/2.e20277c6.chunk.js.LICENSE.txt",
+    "static/media/logo.fc06ab78.svg": "/home-office-calculator/static/media/logo.fc06ab78.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8813008c.js",
+    "static/css/2.a8f673c4.chunk.css",
+    "static/js/2.e20277c6.chunk.js",
+    "static/css/main.8164e364.chunk.css",
+    "static/js/main.51bb6083.chunk.js"
+  ]
+}

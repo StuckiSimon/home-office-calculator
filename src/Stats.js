@@ -200,7 +200,11 @@ function Stats() {
                 property: 'diff',
                 header: 'Sparpotenzial',
                 footer: '' + diffTotalPrice.toLocaleString('de-CH'),
-                render: (data) => data.diff.toLocaleString('de-CH') + ' CHF',
+                render: (data) => (
+                  <Text weight="bold">
+                    {data.diff.toLocaleString('de-CH')} CHF
+                  </Text>
+                ),
               },
             ]}
             data={[
@@ -290,9 +294,9 @@ function Stats() {
                   '' +
                   Math.round(totalDiffEmissions / 1000).toLocaleString('de-CH'),
                 render: (data) => (
-                  <>
+                  <Text weight="bold">
                     {data.diff.toLocaleString('de-CH')} kg CO<sub>2</sub>
-                  </>
+                  </Text>
                 ),
               },
             ]}

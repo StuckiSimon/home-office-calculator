@@ -264,20 +264,24 @@ function Stats() {
               {
                 align: 'end',
                 property: 'normal',
-                header: 'aktuelle Kosten',
+                header: 'aktuelle Emissionen',
                 render: (data) =>
-                  data?.normal
-                    ? data.normal.toLocaleString('de-CH') + ' CHF'
-                    : null,
+                  data?.normal ? (
+                    <>
+                      {data.normal.toLocaleString('de-CH')} kg CO<sub>2</sub>
+                    </>
+                  ) : null,
               },
               {
                 align: 'end',
                 property: 'optimal',
-                header: 'optimierte Kosten',
+                header: 'optimierte Emissionen',
                 render: (data) =>
-                  data?.optimal
-                    ? data.optimal.toLocaleString('de-CH') + ' CHF'
-                    : null,
+                  data?.optimal ? (
+                    <>
+                      {data.optimal.toLocaleString('de-CH')} kg CO<sub>2</sub>
+                    </>
+                  ) : null,
               },
               {
                 align: 'end',

@@ -12,6 +12,6 @@ export const COMMUTE_EMISSIONS = [197.23, 7.32, 54.56, 16, 0];
 export const DAILY_COMMUTE_DISTANCE_KM = 30;
 export const DAILY_COMMUTE_TIME_MINUTES = 62;
 
-export const DAYS_PER_MONTH = 30.4167;
+export const WORK_DAYS_PER_MONTH = 19;
 
 export const WORK_DAYS = 5;

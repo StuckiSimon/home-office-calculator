@@ -14,7 +14,7 @@ import {
   COMMUTE_EMISSIONS,
   COMMUTE_MIX_CAR_INDEX,
   DAILY_COMMUTE_DISTANCE_KM,
-  DAYS_PER_MONTH,
+  WORK_DAYS_PER_MONTH,
   HEATING_COST_PER_M2,
   WORK_DAYS,
 } from './constants';
@@ -131,7 +131,7 @@ export const commuteEmissionsSelector = selector({
           avgEmissionsPerKm *
             places *
             DAILY_COMMUTE_DISTANCE_KM *
-            DAYS_PER_MONTH
+            WORK_DAYS_PER_MONTH
         );
       },
       { get }
@@ -146,7 +146,7 @@ export const commuteTimeSelector = selector({
     const commuteTime = get(commuteTimeState);
     return getCalculation(
       (places) => {
-        return Math.round(places * commuteTime * DAYS_PER_MONTH);
+        return Math.round(places * commuteTime * WORK_DAYS_PER_MONTH);
       },
       { get }
     );

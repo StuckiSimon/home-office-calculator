@@ -1,6 +1,7 @@
 import { selector } from 'recoil';
 import {
   commuteMixState,
+  commuteTimeState,
   employeeAreaState,
   employeeCountState,
   homeOfficeDaysState,
@@ -13,7 +14,6 @@ import {
   COMMUTE_EMISSIONS,
   COMMUTE_MIX_CAR_INDEX,
   DAILY_COMMUTE_DISTANCE_KM,
-  DAILY_COMMUTE_TIME_MINUTES,
   DAYS_PER_MONTH,
   HEATING_COST_PER_M2,
   WORK_DAYS,
@@ -143,9 +143,10 @@ export const commuteEmissionsSelector = selector({
 export const commuteTimeSelector = selector({
   key: 'commuteTimeSelector',
   get: ({ get }) => {
+    const commuteTime = get(commuteTimeState);
     return getCalculation(
       (places) => {
-        return Math.round(places * DAILY_COMMUTE_TIME_MINUTES * DAYS_PER_MONTH);
+        return Math.round(places * commuteTime * DAYS_PER_MONTH);
       },
       { get }
     );

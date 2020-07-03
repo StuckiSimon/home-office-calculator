@@ -4,6 +4,7 @@ import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Tippy from '@tippyjs/react';
 import {
+  commuteTimeState,
   employeeAreaState,
   employeeCountState,
   homeOfficeDaysState,
@@ -74,6 +75,8 @@ function Form() {
   const onHeatingSourceSelect = ({ value }) => {
     setOfficeHeatingSource(value);
   };
+
+  const [commuteTime, setCommuteTime] = useRecoilState(commuteTimeState);
 
   return (
     <Box direction="row" pad="medium">
@@ -279,6 +282,32 @@ function Form() {
                 options={energyStandardsFormatted}
               />
             </Box>
+          </Box>
+        </Tab>
+        <Tab title="Mobilität">
+          <Box pad="small">
+            <ValidatedFormField
+              placeholder="in min"
+              label={
+                <Box direction="row" align="center">
+                  Tägliche Pendelzeit in Minuten
+                  <Tippy
+                    content="Quelle: https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/personenverkehr/pendlermobilitaet.html"
+                    interactive
+                  >
+                    <Box margin={{ horizontal: 'xsmall' }}>
+                      <StatusInfo size="small" color="brand" />
+                    </Box>
+                  </Tippy>
+                </Box>
+              }
+              max={160}
+              type="number"
+              value={commuteTime}
+              onChange={(e) => {
+                setCommuteTime(parseInt(e.target.value, 10) || 0);
+              }}
+            />
           </Box>
         </Tab>
       </Tabs>

@@ -179,16 +179,49 @@ function Stats() {
               },
               {
                 align: 'end',
+                property: 'normal',
+                header: 'aktuelle Kosten',
+                render: (data) =>
+                  data?.normal
+                    ? data.normal.toLocaleString('de-CH') + ' CHF'
+                    : null,
+              },
+              {
+                align: 'end',
+                property: 'optimal',
+                header: 'optimierte Kosten',
+                render: (data) =>
+                  data?.optimal
+                    ? data.optimal.toLocaleString('de-CH') + ' CHF'
+                    : null,
+              },
+              {
+                align: 'end',
                 property: 'diff',
-                header: 'Gespart',
+                header: 'Sparpotenzial',
                 footer: '' + diffTotalPrice.toLocaleString('de-CH'),
                 render: (data) => data.diff.toLocaleString('de-CH') + ' CHF',
               },
             ]}
             data={[
-              { name: 'Immobilien', diff: officeRent.diff },
-              { name: 'Wärmeenergie', diff: heatingPrice.diff },
-              { name: 'Parkplätze', diff: parkingPrice.diff },
+              {
+                name: 'Immobilien',
+                diff: officeRent.diff,
+                optimal: officeRent.optimal,
+                normal: officeRent.normal,
+              },
+              {
+                name: 'Wärmeenergie',
+                diff: heatingPrice.diff,
+                optimal: heatingPrice.optimal,
+                normal: heatingPrice.normal,
+              },
+              {
+                name: 'Parkplätze',
+                diff: parkingPrice.diff,
+                optimal: parkingPrice.optimal,
+                normal: parkingPrice.normal,
+              },
             ]}
           />
         </AccordionPanel>
@@ -230,8 +263,26 @@ function Stats() {
               },
               {
                 align: 'end',
+                property: 'normal',
+                header: 'aktuelle Kosten',
+                render: (data) =>
+                  data?.normal
+                    ? data.normal.toLocaleString('de-CH') + ' CHF'
+                    : null,
+              },
+              {
+                align: 'end',
+                property: 'optimal',
+                header: 'optimierte Kosten',
+                render: (data) =>
+                  data?.optimal
+                    ? data.optimal.toLocaleString('de-CH') + ' CHF'
+                    : null,
+              },
+              {
+                align: 'end',
                 property: 'diff',
-                header: 'Gespart',
+                header: 'Sparpotenzial',
                 footer:
                   '' +
                   Math.round(totalDiffEmissions / 1000).toLocaleString('de-CH'),
@@ -245,10 +296,14 @@ function Stats() {
             data={[
               {
                 name: 'Mobilität',
+                optimal: Math.round(commuteEmissions.optimal / 1000),
+                normal: Math.round(commuteEmissions.normal / 1000),
                 diff: Math.round(commuteEmissions.diff / 1000),
               },
               {
                 name: 'Wärmeenergie',
+                optimal: Math.round(officeHeatingEmissions.optimal / 1000),
+                normal: Math.round(officeHeatingEmissions.normal / 1000),
                 diff: Math.round(officeHeatingEmissions.diff / 1000),
               },
             ]}

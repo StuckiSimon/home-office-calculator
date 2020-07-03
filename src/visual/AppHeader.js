@@ -1,4 +1,4 @@
-import { Box, Button, Header, Heading, Menu, Text } from 'grommet';
+import { Box, Header, Heading, Text } from 'grommet';
 import React from 'react';
 import { ReactComponent as LogoIcon } from './assets/logo.svg';
 
